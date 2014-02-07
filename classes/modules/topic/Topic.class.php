@@ -34,7 +34,7 @@ class PluginViews_ModuleTopic extends PluginViews_Inherit_ModuleTopic {
                 'viewstat' => $bViewstat,
             );
             if ($sPeriod) {
-                $aFilter['topic_date_more'] = $sPeriod;
+                $aFilter[($bViewstat && Config::Get('plugin.views.stat_date_filter')) ? 'stat_date_more' : 'topic_date_more'] = $sPeriod;
             }
             $aFilter['order']=array('t.topic_count_read desc','t.topic_id desc');
             return $this->GetTopicsByFilter($aFilter,$iPage,$iPerPage);
@@ -64,7 +64,7 @@ class PluginViews_ModuleTopic extends PluginViews_Inherit_ModuleTopic {
                 'viewstat' => $bViewstat,
             );
             if ($sPeriod) {
-                $aFilter['topic_date_more'] = $sPeriod;
+                $aFilter[($bViewstat && Config::Get('plugin.views.stat_date_filter')) ? 'stat_date_more' : 'topic_date_more'] = $sPeriod;
             }
             $aFilter['order']=array('t.topic_count_read desc','t.topic_id desc');
             /**
@@ -103,7 +103,7 @@ class PluginViews_ModuleTopic extends PluginViews_Inherit_ModuleTopic {
                 'viewstat' => $bViewstat,
             );
             if ($sPeriod) {
-                $aFilter['topic_date_more'] = $sPeriod;
+                $aFilter[($bViewstat && Config::Get('plugin.views.stat_date_filter')) ? 'stat_date_more' : 'topic_date_more'] = $sPeriod;
             }
             $aFilter['order']=array('t.topic_count_read desc','t.topic_id desc');
             return $this->GetTopicsByFilter($aFilter,$iPage,$iPerPage);
@@ -135,7 +135,7 @@ class PluginViews_ModuleTopic extends PluginViews_Inherit_ModuleTopic {
             'viewstat' => $bViewstat,
         );
         if ($sPeriod) {
-            $aFilter['topic_date_more'] = $sPeriod;
+            $aFilter[($bViewstat && Config::Get('plugin.views.stat_date_filter')) ? 'stat_date_more' : 'topic_date_more'] = $sPeriod;
         }
         $aFilter['order']=array('t.topic_count_read desc','t.topic_id desc');
         /**
