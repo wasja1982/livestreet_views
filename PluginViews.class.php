@@ -19,7 +19,7 @@ if (!class_exists('Plugin')) {
 class PluginViews extends Plugin {
 
     protected $aInherits = array(
-        'action' => array('ActionBlog', 'ActionPersonalBlog', 'ActionIndex', 'ActionProfile'),
+        'action' => array('ActionBlog', 'ActionPersonalBlog', 'ActionIndex'),
         'mapper' => array('ModuleTopic_MapperTopic'),
         'module' => array('ModuleTopic'),
     );
