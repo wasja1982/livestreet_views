@@ -9,33 +9,28 @@
  *
  **/
 
-class PluginViews_HookAddlink extends Hook
-{
-    public function RegisterHook()
-    {
+class PluginViews_HookViews extends Hook {
+    public function RegisterHook() {
         $this->AddHook('template_menu_blog_log_item', 'InjectLogLink');
         $this->AddHook('template_menu_blog_blog_item', 'InjectBlogLink');
         $this->AddHook('template_menu_blog_index_item', 'InjectIndexLink');
     }
 
-    public function InjectBlogLink($aParam)
-    {
+    public function InjectBlogLink($aParam) {
         $sTemplatePath = Plugin::GetTemplatePath(__CLASS__) . 'inject_blog_link.tpl';
         if ($this->Viewer_TemplateExists($sTemplatePath)) {
             return $this->Viewer_Fetch($sTemplatePath);
         }
     }
 
-    public function InjectIndexLink($aParam)
-    {
+    public function InjectIndexLink($aParam) {
         $sTemplatePath = Plugin::GetTemplatePath(__CLASS__) . 'inject_index_link.tpl';
         if ($this->Viewer_TemplateExists($sTemplatePath)) {
             return $this->Viewer_Fetch($sTemplatePath);
         }
     }
 
-    public function InjectLogLink($aParam)
-    {
+    public function InjectLogLink($aParam) {
         $sTemplatePath = Plugin::GetTemplatePath(__CLASS__) . 'inject_log_link.tpl';
         if ($this->Viewer_TemplateExists($sTemplatePath)) {
             return $this->Viewer_Fetch($sTemplatePath);
