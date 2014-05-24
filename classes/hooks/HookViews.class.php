@@ -14,6 +14,10 @@ class PluginViews_HookViews extends Hook {
         $this->AddHook('template_menu_blog_log_item', 'InjectLogLink');
         $this->AddHook('template_menu_blog_blog_item', 'InjectBlogLink');
         $this->AddHook('template_menu_blog_index_item', 'InjectIndexLink');
+        if (Config::Get('plugin.views.show_info')) {
+            $this->Viewer_AppendStyle(Plugin::GetTemplateWebPath(__CLASS__) . 'css/views.css');
+            $this->AddHook('template_topic_show_info', 'InjectShowInfo');
+        }
     }
 
     public function InjectBlogLink($aParam) {
@@ -34,6 +38,22 @@ class PluginViews_HookViews extends Hook {
         $sTemplatePath = Plugin::GetTemplatePath(__CLASS__) . 'inject_log_link.tpl';
         if ($this->Viewer_TemplateExists($sTemplatePath)) {
             return $this->Viewer_Fetch($sTemplatePath);
+        }
+    }
+
+    public function InjectShowInfo($aParam) {
+        $sTemplatePath = Plugin::GetTemplatePath(__CLASS__) . 'inject_show_info.tpl';
+        if ($this->Viewer_TemplateExists($sTemplatePath)) {
+            if ((class_exists('MobileDetect') && MobileDetect::IsMobileTemplate()) || // Мобильный шаблон (отображает свой счетчик в активном режиме)
+                (class_exists('PluginViewstat') && in_array('viewstat', $this->Plugin_GetActivePlugins())) || // Плагин ViewStat (отображает свой счетчик)
+                (class_exists('PluginViewcount') && in_array('viewcount', $this->Plugin_GetActivePlugins()))) { // Плагин ViewCount (отображает свой счетчик)
+                return;
+            }
+            if (isset($aParam) && isset($aParam['topic'])) {
+                $oTopic = $aParam['topic'];
+                $this->Viewer_Assign('oTopic', $oTopic);
+                return $this->Viewer_Fetch($sTemplatePath);
+            }
         }
     }
 }

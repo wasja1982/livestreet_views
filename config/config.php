@@ -15,5 +15,8 @@ $config = array();
 // Использует данные плагина Viewstat (должен быть установлен). По умолчанию отключено (false).
 $config['stat_date_filter'] = false;
 
+// Показывать число просмотров в панели информации топика
+$config['show_info'] = true;
+
 return $config;
 ?>

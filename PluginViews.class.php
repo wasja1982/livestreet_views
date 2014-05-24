@@ -21,6 +21,7 @@ class PluginViews extends Plugin {
     protected $aInherits = array(
         'action' => array('ActionBlog', 'ActionPersonalBlog', 'ActionIndex'),
         'mapper' => array('ModuleTopic_MapperTopic'),
+        'entity' => array('ModuleTopic_EntityTopic'),
         'module' => array('ModuleTopic'),
     );
 
