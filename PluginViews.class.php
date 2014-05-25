@@ -29,6 +29,9 @@ class PluginViews extends Plugin {
      * Активация плагина
      */
     public function Activate() {
+        if (!$this->isTableExists('prefix_topic_view')) {
+            $this->ExportSQL(dirname(__FILE__).'/dump.sql');
+        }
         return true;
     }
 

@@ -10,16 +10,17 @@
  **/
 
 class PluginViews_ModuleTopic_EntityTopic extends PluginViews_Inherit_ModuleTopic_EntityTopic {
-    /**
-     * Возвращает счетчик для топика
-     *
-     * @return null|string
-     */
-    public function getViews() {
-        if (class_exists('PluginViewstat') && in_array('viewstat', $this->Plugin_GetActivePlugins())) {
-            return $this->PluginViewstat_Viewstat_TopicGetAllView($this->getId());
-        }
-        return $this->getCountRead();
+    public function AddView() {
+        return $this->PluginViews_Topic_AddView($this->getId());
     }
+
+	/**
+	 * Возвращает число прочтений топика
+	 *
+	 * @return int|null
+	 */
+	public function getCountRead() {
+        return $this->PluginViews_Topic_GetCountRead($this->getId());
+	}
 }
 ?>

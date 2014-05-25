@@ -148,5 +148,13 @@ class PluginViews_ModuleTopic extends PluginViews_Inherit_ModuleTopic {
         }
         return $this->GetTopicsByFilter($aFilter,$iPage,$iPerPage);
     }
+    
+    public function AddView($sTopicId) {
+		return $this->oMapperTopic->AddView($sTopicId);
+    }
+
+	public function GetCountRead($sTopicId) {
+		return $this->oMapperTopic->GetCountRead($sTopicId);
+    }
 }
 ?>

@@ -20,6 +20,7 @@ class PluginViews_HookViews extends Hook {
             $this->Viewer_AppendStyle(Plugin::GetTemplateWebPath(__CLASS__) . 'css/views.css');
             $this->AddHook('template_topic_show_info', 'InjectShowInfo');
         }
+        $this->AddHook('topic_show', 'TopicShow');
     }
 
     public function InjectBlogLink($aParam) {
@@ -57,6 +58,16 @@ class PluginViews_HookViews extends Hook {
                 return $this->Viewer_Fetch($sTemplatePath);
             }
         }
+    }
+
+    public function TopicShow($aParam) {
+        $oTopic = $aParam['oTopic'];
+
+        $oUserCurrent = $this->User_GetUserCurrent();
+        if ($oUserCurrent && $oUserCurrent->getId() == $oTopic->getUserId()) {
+            return;
+        }
+        $oTopic->AddView();
     }
 }
 ?>

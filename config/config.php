@@ -21,5 +21,7 @@ $config['stat_date_filter'] = false;
 // Показывать число просмотров в панели информации топика
 $config['show_info'] = true;
 
+Config::Set('db.table.topic_view', '___db.table.prefix___topic_view');
+
 return $config;
 ?>

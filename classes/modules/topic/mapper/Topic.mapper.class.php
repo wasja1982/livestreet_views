@@ -69,5 +69,24 @@ class PluginViews_ModuleTopic_MapperTopic extends PluginViews_Inherit_ModuleTopi
             return $aTopics;
         }
     }
+    
+	public function AddView($sTopicId) {
+        $sql = "UPDATE " . Config::Get('db.table.topic_view') . "  SET `topic_count_read`=`topic_count_read`+1 WHERE `topic_id`=?d";
+		if ($this->oDb->query($sql, $sTopicId)) {
+			return true;
+		}
+		return false;
+	}
+
+	public function GetCountRead($sTopicId) {
+		$sql = "SELECT topic_count_read FROM " . Config::Get('db.table.topic_view') . " WHERE topic_id = ?d";
+		if ($aRow = $this->oDb->selectRow($sql, $sTopicId)) {
+			return $aRow['topic_count_read'];
+		} else {
+            $sql = "INSERT INTO " . Config::Get('db.table.topic_view') . " (`topic_id`, `topic_count_read`) VALUES (?d, 0)";
+            $this->oDb->query($sql, $sTopicId);
+            return 0;
+        }
+	}
 }
 ?>
