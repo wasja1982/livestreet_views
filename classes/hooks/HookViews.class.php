@@ -48,8 +48,7 @@ class PluginViews_HookViews extends Hook {
         $sTemplatePath = Plugin::GetTemplatePath(__CLASS__) . 'inject_show_info.tpl';
         if ($this->Viewer_TemplateExists($sTemplatePath)) {
             if ((class_exists('MobileDetect') && MobileDetect::IsMobileTemplate()) || // Мобильный шаблон (отображает свой счетчик в активном режиме)
-                (class_exists('PluginViewstat') && in_array('viewstat', $this->Plugin_GetActivePlugins())) || // Плагин ViewStat (отображает свой счетчик)
-                (class_exists('PluginViewcount') && in_array('viewcount', $this->Plugin_GetActivePlugins()))) { // Плагин ViewCount (отображает свой счетчик)
+                (class_exists('PluginViewstat') && in_array('viewstat', $this->Plugin_GetActivePlugins()))) { // Плагин ViewStat (отображает свой счетчик)
                 return;
             }
             if (isset($aParam) && isset($aParam['topic'])) {
@@ -62,6 +61,11 @@ class PluginViews_HookViews extends Hook {
 
     public function TopicShow($aParam) {
         $oTopic = $aParam['oTopic'];
+
+        if ((class_exists('MobileDetect')) || // Мобильный шаблон (использует свой счетчик)
+            (class_exists('PluginViewstat') && in_array('viewstat', $this->Plugin_GetActivePlugins()))) { // Плагин ViewStat (использует свой счетчик)
+            return;
+        }
 
         $oUserCurrent = $this->User_GetUserCurrent();
         if ($oUserCurrent && $oUserCurrent->getId() == $oTopic->getUserId()) {

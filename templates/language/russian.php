@@ -14,6 +14,7 @@
  */
 return array(
     'views' => 'Просматриваемые',
+    'enabled_viewcount' => 'Деактивируйте плагин ViewCount',
 );
 
 ?>

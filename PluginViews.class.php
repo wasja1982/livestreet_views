@@ -29,6 +29,16 @@ class PluginViews extends Plugin {
      * Активация плагина
      */
     public function Activate() {
+        /*
+         * Запрет на использование плагина ViewCount
+         */
+        if (class_exists('PluginViewcount')) {
+            $plugins = $this->Plugin_GetActivePlugins();
+            if (in_array('viewcount', $plugins)) {
+                $this->Message_AddError($this->Lang_Get('enabled_viewcount'), 'Views', true);
+                return false;
+            }
+        }
         if (!$this->isTableExists('prefix_topic_view')) {
             $this->ExportSQL(dirname(__FILE__).'/dump.sql');
         }
