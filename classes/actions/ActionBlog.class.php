@@ -25,8 +25,10 @@ class PluginViews_ActionBlog extends PluginViews_Inherit_ActionBlog
      *
      */
     protected function RegisterEvent() {
-        $this->AddEventPreg('/^views$/i','/^(page([1-9]\d{0,5}))?$/i',array('EventTopics','topics'));
-        $this->AddEventPreg('/^[\w\-\_]+$/i','/^views$/i','/^(page([1-9]\d{0,5}))?$/i',array('EventShowBlog','blog'));
+        if (Config::Get('plugin.views.use_sort')) {
+            $this->AddEventPreg('/^views$/i','/^(page([1-9]\d{0,5}))?$/i',array('EventTopics','topics'));
+            $this->AddEventPreg('/^[\w\-\_]+$/i','/^views$/i','/^(page([1-9]\d{0,5}))?$/i',array('EventShowBlog','blog'));
+        }
         parent::RegisterEvent();
     }
 
@@ -36,7 +38,7 @@ class PluginViews_ActionBlog extends PluginViews_Inherit_ActionBlog
      */
     protected function EventTopics() {
         $sShowType=$this->sCurrentEvent;
-        if ($sShowType != 'views') {
+        if (!Config::Get('plugin.views.use_sort') || $sShowType != 'views') {
             return parent::EventTopics();
         }
 
@@ -98,7 +100,7 @@ class PluginViews_ActionBlog extends PluginViews_Inherit_ActionBlog
      */
     protected function EventShowBlog() {
         $sShowType=$this->GetParamEventMatch(0,0);
-        if ($sShowType != 'views') {
+        if (!Config::Get('plugin.views.use_sort') || $sShowType != 'views') {
             return parent::EventShowBlog();
         }
 

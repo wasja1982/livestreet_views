@@ -16,7 +16,9 @@ class PluginViews_ActionPersonalBlog extends PluginViews_Inherit_ActionPersonalB
      *
      */
     protected function RegisterEvent() {
-        $this->AddEventPreg('/^views$/i','/^(page([1-9]\d{0,5}))?$/i','EventTopics');
+        if (Config::Get('plugin.views.use_sort')) {
+            $this->AddEventPreg('/^views$/i','/^(page([1-9]\d{0,5}))?$/i','EventTopics');
+        }
         parent::RegisterEvent();
     }
 
@@ -26,7 +28,7 @@ class PluginViews_ActionPersonalBlog extends PluginViews_Inherit_ActionPersonalB
      */
     protected function EventTopics() {
         $sShowType=$this->sCurrentEvent;
-        if ($sShowType != 'views') {
+        if (!Config::Get('plugin.views.use_sort') || $sShowType != 'views') {
             return parent::EventTopics();
         }
 
@@ -83,4 +85,3 @@ class PluginViews_ActionPersonalBlog extends PluginViews_Inherit_ActionPersonalB
     }
 }
 ?>
-    

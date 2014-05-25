@@ -16,7 +16,9 @@ class PluginViews_ActionIndex extends PluginViews_Inherit_ActionIndex
      *
      */
     protected function RegisterEvent() {
-        $this->AddEventPreg('/^views$/i','/^(page([1-9]\d{0,5}))?$/i','EventViews');
+        if (Config::Get('plugin.views.use_sort')) {
+            $this->AddEventPreg('/^views$/i','/^(page([1-9]\d{0,5}))?$/i','EventViews');
+        }
         parent::RegisterEvent();
     }
 
