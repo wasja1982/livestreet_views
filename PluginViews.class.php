@@ -22,7 +22,7 @@ class PluginViews extends Plugin {
         'action' => array('ActionBlog', 'ActionPersonalBlog', 'ActionIndex'),
         'mapper' => array('ModuleTopic_MapperTopic'),
         'entity' => array('ModuleTopic_EntityTopic'),
-        'module' => array('ModuleTopic'),
+        'module' => array('ModuleTopic', 'PluginMobiletpl_ModuleMain' => 'PluginViews_ModuleMain'),
     );
 
     /**
