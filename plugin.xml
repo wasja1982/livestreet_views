@@ -17,6 +17,6 @@
 	</requires>
 	<description>
 		<lang name="default">Views</lang>
-		<lang name="russian">Сортировка топиков по числу просмотров.</lang>
+		<lang name="russian">Подсчет количества просмотров топиков.</lang>
 	</description>
 </plugin>
