@@ -35,7 +35,7 @@ class PluginViews extends Plugin {
         if (class_exists('PluginViewcount')) {
             $plugins = $this->Plugin_GetActivePlugins();
             if (in_array('viewcount', $plugins)) {
-                $this->Message_AddError($this->Lang_Get('enabled_viewcount'), 'Views', true);
+                $this->Message_AddError('Деактивируйте плагин ViewCount!', 'Views', true);
                 return false;
             }
         }
