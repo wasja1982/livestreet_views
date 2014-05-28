@@ -150,8 +150,20 @@ class PluginViews_ModuleTopic extends PluginViews_Inherit_ModuleTopic {
     }
     
     public function AddView($sTopicId) {
-        if(!$this->oUserCurrent && Config::Get('plugin.views.only_users')) {
+        if (!$this->oUserCurrent && Config::Get('plugin.views.only_users')) {
             return false;
+        }
+        if (Config::Get('plugin.views.only_once')) {
+            $aTopicIds = array();
+            $sTopicIds = $this->Session_Get('views_topic_ids');
+            if ($sTopicIds) {
+                $aTopicIds = explode(".", $sTopicIds);
+                if (is_array($aTopicIds) && in_array($sTopicId, $aTopicIds)) {
+                    return false;
+                }
+            }
+            $aTopicIds[] = $sTopicId;
+            $this->Session_Set('views_topic_ids', implode(".", $aTopicIds));
         }
         return $this->oMapperTopic->AddView($sTopicId);
     }
