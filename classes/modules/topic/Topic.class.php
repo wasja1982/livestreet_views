@@ -150,11 +150,14 @@ class PluginViews_ModuleTopic extends PluginViews_Inherit_ModuleTopic {
     }
     
     public function AddView($sTopicId) {
-		return $this->oMapperTopic->AddView($sTopicId);
+        if(!$this->oUserCurrent && Config::Get('plugin.views.only_users')) {
+            return false;
+        }
+        return $this->oMapperTopic->AddView($sTopicId);
     }
 
-	public function GetCountRead($sTopicId) {
-		return $this->oMapperTopic->GetCountRead($sTopicId);
+    public function GetCountRead($sTopicId) {
+        return $this->oMapperTopic->GetCountRead($sTopicId);
     }
 }
 ?>
