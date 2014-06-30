@@ -165,6 +165,12 @@ class PluginViews_ModuleTopic extends PluginViews_Inherit_ModuleTopic {
             $aTopicIds[] = $sTopicId;
             $this->Session_Set('views_topic_ids', implode(".", $aTopicIds));
         }
+        $bots = array('Googlebot', 'YandexBot', 'StackRambler', 'Aport', 'Slurp', 'MSNBot', 'ia_archiver');
+        foreach ($bots as $bot) {
+            if (stripos($_SERVER['HTTP_USER_AGENT'], $bot) !== false) {
+                return false;
+            }
+        }
         return $this->oMapperTopic->AddView($sTopicId);
     }
 
