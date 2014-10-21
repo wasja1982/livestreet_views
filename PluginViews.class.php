@@ -32,12 +32,10 @@ class PluginViews extends Plugin {
         /*
          * Запрет на использование плагина ViewCount
          */
-        if (class_exists('PluginViewcount')) {
-            $plugins = $this->Plugin_GetActivePlugins();
-            if (in_array('viewcount', $plugins)) {
-                $this->Message_AddError('Деактивируйте плагин ViewCount!', 'Views', true);
-                return false;
-            }
+        $plugins = $this->Plugin_GetActivePlugins();
+        if (in_array('viewcount', $plugins)) {
+            $this->Message_AddError('Деактивируйте плагин ViewCount!', 'Views', true);
+            return false;
         }
         if (!$this->isTableExists('prefix_topic_view')) {
             $this->ExportSQL(dirname(__FILE__).'/dump.sql');
