@@ -1,0 +1,1 @@
+<li><a href="{$sMenuSubBlogUrl}views/" {if $sMenuSubItemSelect=='views'}class="active"{/if}>{$aLang.plugin.views.views}</a></li> 

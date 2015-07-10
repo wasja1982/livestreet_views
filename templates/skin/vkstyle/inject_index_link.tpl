@@ -1,0 +1,1 @@
+<li><a href="{router page='index'}views/" {if $sMenuSubItemSelect=='views'}class="active"{/if}>{$aLang.plugin.views.views}</a></li> 
