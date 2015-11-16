@@ -2,7 +2,7 @@
 /**
  * Views - подсчет количества просмотров топиков
  *
- * Версия:	1.0.1
+ * Версия:	1.0.2
  * Автор:	Александр Вереник
  * Профиль:	http://livestreet.ru/profile/Wasja/
  * GitHub:	https://github.com/wasja1982/livestreet_views
